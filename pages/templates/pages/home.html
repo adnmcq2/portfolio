@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="{% static 'pages/css/style.css' %}">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+</head>
+<body>
+
+    <header>
+        <h1>My Portfolio</h1>
+        <p>Engineering | Software Development | Data Analysis</p>
+    </header>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#blog">Blog</a>
+    </nav>
+
+    <main>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                I'm an engineer and software developer interested in
+                data analysis, machine learning, and building applications
+                that make complicated systems easier to use.
+            </p>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+
+            <h3>Fantasy Premier League Predictor</h3>
+            <p>
+                A Python-based application for analyzing football statistics
+                and predicting player performance.
+            </p>
+
+            <h3>Benefits Navigator</h3>
+            <p>
+                An experimental application designed to simplify access
+                to unemployment insurance, SNAP, and Medicaid.
+            </p>
+        </section>
+
+        <section id="blog">
+            <h2>Blog</h2>
+            <p>Articles and investigations coming soon.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 My Portfolio</p>
+    </footer>
+
+</body>
+</html>
