@@ -1,65 +1,39 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "pages/base.html" %}
 
-    <link rel="stylesheet" href="{% static 'pages/css/style.css' %}">
+{% block content %}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-</head>
-<body>
+<section class="intro">
 
-    <header>
-        <h1>My Portfolio</h1>
-        <p>Engineering | Software Development | Data Analysis</p>
-    </header>
+    <h2>GOOD BIKES. SECOND CHANCES.</h2>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#blog">Blog</a>
-    </nav>
+    <p>
+        Wednesday Cycles is a small, independent bicycle operation
+        in Washington, DC.
+    </p>
 
-    <main>
+    <p>
+        We like old steel frames, affordable transportation,
+        interesting components, and keeping perfectly good
+        bicycles out of the landfill.
+    </p>
 
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                I'm an engineer and software developer interested in
-                data analysis, machine learning, and building applications
-                that make complicated systems easier to use.
-            </p>
-        </section>
+    <p>
+        Used bicycles for sale. Basic repairs by appointment.
+        No carbon fiber required.
+    </p>
 
-        <section id="projects">
-            <h2>Projects</h2>
+</section>
 
-            <h3>Fantasy Premier League Predictor</h3>
-            <p>
-                A Python-based application for analyzing football statistics
-                and predicting player performance.
-            </p>
+<section class="featured">
 
-            <h3>Benefits Navigator</h3>
-            <p>
-                An experimental application designed to simplify access
-                to unemployment insurance, SNAP, and Medicaid.
-            </p>
-        </section>
+    <h2>WHAT'S IN THE SHOP?</h2>
 
-        <section id="blog">
-            <h2>Blog</h2>
-            <p>Articles and investigations coming soon.</p>
-        </section>
+    <p>
+        Our collection of used bicycles is coming soon.
+        Check back for vintage road bikes, commuters,
+        and whatever else we manage to drag out of a basement.
+    </p>
 
-    </main>
+</section>
 
-    <footer>
-        <p>&copy; 2026 My Portfolio</p>
-    </footer>
-
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wednesday Cycles</title>
+
+    <link rel="stylesheet"
+          href="{% static 'pages/css/style.css' %}">
+</head>
+
+<body>
+
+    <header class="site-header">
+
+        <div class="masthead">
+            <h1>WEDNESDAY CYCLES</h1>
+            <p>USED BIKES • REPAIRS • WASHINGTON, DC</p>
+        </div>
+
+        <nav class="main-nav">
+            <a href="{% url 'home' %}">HOME</a>
+            <a href="/bikes/">BIKES</a>
+            <a href="/repairs/">REPAIRS</a>
+            <a href="/journal/">JOURNAL</a>
+            <a href="/about/">ABOUT</a>
+        </nav>
+
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>WEDNESDAY CYCLES — WASHINGTON, DC</p>
+        <p>KEEP THE OLD BIKES ROLLING.</p>
+    </footer>
+
+</body>
+</html>
