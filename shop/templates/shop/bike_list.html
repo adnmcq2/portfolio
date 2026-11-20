@@ -1,0 +1,43 @@
+{% extends "pages/base.html" %}
+
+{% block content %}
+
+<h2>BIKES FOR SALE</h2>
+
+<div class="bike-grid">
+
+    {% for bike in bikes %}
+
+        <div class="bike-card">
+
+            {% with photo=bike.photos.first %}
+                {% if photo %}
+                    <img src="{{ photo.image.url }}"
+                         alt="{{ bike.manufacturer }} {{ bike.model }}"
+                         style="max-width: 300px;">
+                {% endif %}
+            {% endwith %}
+
+            <h3>
+                {{ bike.year|default_if_none:"" }}
+                {{ bike.manufacturer }}
+                {{ bike.model }}
+            </h3>
+
+            <p>Frame size: {{ bike.frame_size }}</p>
+
+            <p>Condition: {{ bike.get_condition_display }}</p>
+
+            <h3>${{ bike.price }}</h3>
+
+        </div>
+
+    {% empty %}
+
+        <p>No bicycles are currently available.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
