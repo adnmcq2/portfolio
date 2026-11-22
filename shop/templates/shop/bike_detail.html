@@ -1,0 +1,49 @@
+{% extends "pages/base.html" %}
+
+{% block content %}
+
+<a href="{% url 'bike_list' %}">← Back to bicycles</a>
+
+<h2>
+    {{ bike.year|default_if_none:"" }}
+    {{ bike.manufacturer }}
+    {{ bike.model }}
+</h2>
+
+<div class="bike-detail">
+
+    <div class="bike-gallery">
+        {% for photo in bike.photos.all %}
+            <img src="{{ photo.image.url }}"
+                 alt="{{ bike.manufacturer }} {{ bike.model }}"
+                 style="max-width: 100%;">
+
+            {% if photo.caption %}
+                <p>{{ photo.caption }}</p>
+            {% endif %}
+        {% empty %}
+            <p>No photographs available.</p>
+        {% endfor %}
+    </div>
+
+    <div class="bike-information">
+
+        <h2>${{ bike.price }}</h2>
+
+        <p><strong>Manufacturer:</strong> {{ bike.manufacturer }}</p>
+        <p><strong>Model:</strong> {{ bike.model }}</p>
+        <p><strong>Year:</strong> {{ bike.year|default_if_none:"Unknown" }}</p>
+        <p><strong>Category:</strong> {{ bike.get_category_display }}</p>
+        <p><strong>Frame size:</strong> {{ bike.frame_size }}</p>
+        <p><strong>Condition:</strong> {{ bike.get_condition_display }}</p>
+        <p><strong>Status:</strong> {{ bike.get_status_display }}</p>
+
+        <h3>About this bicycle</h3>
+
+        {{ bike.description|linebreaks }}
+
+    </div>
+
+</div>
+
+{% endblock %}

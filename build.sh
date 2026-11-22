@@ -7,3 +7,5 @@ python manage.py migrate --noinput
 
 #one time
 #python manage.py createsuperuser --noinput
+
+

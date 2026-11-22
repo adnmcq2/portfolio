@@ -4,37 +4,186 @@
 
 <h2>BIKES FOR SALE</h2>
 
+<p>Good bikes. Second chances. Browse our current inventory.</p>
+
+<form method="get" class="inventory-controls">
+
+
+    <label for="manufacturer">Manufacturer:</label>
+<!--Manufacturer search-->
+<select name="manufacturer" id="manufacturer"
+        onchange="this.form.submit()">
+
+    <option value="">All manufacturers</option>
+
+    {% for name in manufacturers %}
+        <option value="{{ name }}"
+            {% if manufacturer == name %}selected{% endif %}>
+            {{ name }}
+        </option>
+    {% endfor %}
+
+</select>
+
+
+    <label for="category">Category:</label>
+<!--Category search-->
+<select name="category" id="category"
+        onchange="this.form.submit()">
+
+    <option value="">All categories</option>
+
+    {% for value, label in categories %}
+        <option value="{{ value }}"
+            {% if category == value %}selected{% endif %}>
+            {{ label }}
+        </option>
+    {% endfor %}
+
+</select>
+
+<!--    Frame size search-->
+
+    <label for="frame_size">Frame size:</label>
+
+<select name="frame_size" id="frame_size"
+        onchange="this.form.submit()">
+
+    <option value="">All sizes</option>
+
+    {% for size in frame_sizes %}
+        <option value="{{ size }}"
+            {% if frame_size == size %}selected{% endif %}>
+            {{ size }}
+        </option>
+    {% endfor %}
+
+</select>
+
+<!--    Condition search-->
+    <label for="condition">Condition:</label>
+
+<select name="condition" id="condition"
+        onchange="this.form.submit()">
+
+    <option value="">All conditions</option>
+
+    {% for value, label in conditions %}
+        <option value="{{ value }}"
+            {% if condition == value %}selected{% endif %}>
+            {{ label }}
+        </option>
+    {% endfor %}
+
+</select>
+
+    <label for="sort">Sort by:</label>
+
+    <select name="sort" id="sort" onchange="this.form.submit()">
+
+        <option value="newest" {% if sort == "newest" %}selected{% endif %}>
+            Recently added
+        </option>
+
+        <option value="price_asc" {% if sort == "price_asc" %}selected{% endif %}>
+            Price: Low to high
+        </option>
+
+        <option value="price_desc" {% if sort == "price_desc" %}selected{% endif %}>
+            Price: High to low
+        </option>
+
+        <option value="year_asc" {% if sort == "year_asc" %}selected{% endif %}>
+            Oldest bicycles
+        </option>
+
+        <option value="year_desc" {% if sort == "year_desc" %}selected{% endif %}>
+            Newest bicycles
+        </option>
+
+        <option value="manufacturer" {% if sort == "manufacturer" %}selected{% endif %}>
+            Manufacturer: A–Z
+        </option>
+
+    </select>
+
+
+<!--    Min Max price-->
+
+    <label for="min_price">Min price:</label>
+
+<input type="number"
+       name="min_price"
+       id="min_price"
+       min="0"
+       max="999999.99"
+       step="0.01"
+       placeholder="No min"
+       value="{{ min_price }}">
+
+<label for="max_price">Max price:</label>
+
+<input type="number"
+       name="max_price"
+       id="max_price"
+       min="0"
+       max="999999.99"
+       step="0.01"
+       placeholder="No max"
+       value="{{ max_price }}">
+
+    <button type="submit">Apply</button>
+
+<a href="{% url 'bike_list' %}" class="reset-filters">
+    Clear filters
+</a>
+</form>
+
+<p class="inventory-count">
+    {{ bikes|length }} bicycle{{ bikes|length|pluralize }} found
+</p>
+
 <div class="bike-grid">
 
     {% for bike in bikes %}
 
-        <div class="bike-card">
+        <article class="bike-card">
 
-            {% with photo=bike.photos.first %}
-                {% if photo %}
-                    <img src="{{ photo.image.url }}"
-                         alt="{{ bike.manufacturer }} {{ bike.model }}"
-                         style="max-width: 300px;">
-                {% endif %}
-            {% endwith %}
+            <a href="{% url 'bike_detail' bike.pk %}">
+
+                {% with photo=bike.photos.all.0 %}
+                    {% if photo %}
+                        <img src="{{ photo.image.url }}"
+                             alt="{{ bike.manufacturer }} {{ bike.model }}"
+                             loading="lazy">
+                    {% else %}
+                        <div class="bike-placeholder">
+                            No photograph available
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+            </a>
 
             <h3>
-                {{ bike.year|default_if_none:"" }}
-                {{ bike.manufacturer }}
-                {{ bike.model }}
+                <a href="{% url 'bike_detail' bike.pk %}">
+                    {{ bike.year|default_if_none:"" }}
+                    {{ bike.manufacturer }}
+                    {{ bike.model }}
+                </a>
             </h3>
 
+            <p>{{ bike.get_category_display }}</p>
             <p>Frame size: {{ bike.frame_size }}</p>
-
             <p>Condition: {{ bike.get_condition_display }}</p>
 
-            <h3>${{ bike.price }}</h3>
+            <p class="bike-price">${{ bike.price }}</p>
 
-        </div>
+        </article>
 
     {% empty %}
 
-        <p>No bicycles are currently available.</p>
+        <p>No bicycles match your selection.</p>
 
     {% endfor %}
 
