@@ -147,39 +147,45 @@
 
     {% for bike in bikes %}
 
-        <article class="bike-card">
+<!--        <article class="bike-card">-->
 
-            <a href="{% url 'bike_detail' bike.pk %}">
 
-                {% with photo=bike.photos.all.0 %}
-                    {% if photo %}
-                        <img src="{{ photo.image.url }}"
-                             alt="{{ bike.manufacturer }} {{ bike.model }}"
-                             loading="lazy">
-                    {% else %}
-                        <div class="bike-placeholder">
-                            No photograph available
-                        </div>
-                    {% endif %}
-                {% endwith %}
+<!--            <span class="bike-status status-{{ bike.status }}">-->
+<!--    {{ bike.get_status_display }}-->
+<!--</span>-->
 
-            </a>
+<!--            <a href="{% url 'bike_detail' bike.pk %}">-->
 
-            <h3>
-                <a href="{% url 'bike_detail' bike.pk %}">
-                    {{ bike.year|default_if_none:"" }}
-                    {{ bike.manufacturer }}
-                    {{ bike.model }}
-                </a>
-            </h3>
+<!--                {% with photo=bike.photos.all.0 %}-->
+<!--                    {% if photo %}-->
+<!--                        <img src="{{ photo.image.url }}"-->
+<!--                             alt="{{ bike.manufacturer }} {{ bike.model }}"-->
+<!--                             loading="lazy">-->
+<!--                    {% else %}-->
+<!--                        <div class="bike-placeholder">-->
+<!--                            No photograph available-->
+<!--                        </div>-->
+<!--                    {% endif %}-->
+<!--                {% endwith %}-->
 
-            <p>{{ bike.get_category_display }}</p>
-            <p>Frame size: {{ bike.frame_size }}</p>
-            <p>Condition: {{ bike.get_condition_display }}</p>
+<!--            </a>-->
 
-            <p class="bike-price">${{ bike.price }}</p>
+<!--            <h3>-->
+<!--                <a href="{% url 'bike_detail' bike.pk %}">-->
+<!--                    {{ bike.year|default_if_none:"" }}-->
+<!--                    {{ bike.manufacturer }}-->
+<!--                    {{ bike.model }}-->
+<!--                </a>-->
+<!--            </h3>-->
 
-        </article>
+<!--            <p>{{ bike.get_category_display }}</p>-->
+<!--            <p>Frame size: {{ bike.frame_size }}</p>-->
+<!--            <p>Condition: {{ bike.get_condition_display }}</p>-->
+
+<!--            <p class="bike-price">${{ bike.price }}</p>-->
+
+<!--        </article>-->
+{% include "shop/bike_card.html" with bike=bike %}
 
     {% empty %}
 

@@ -26,13 +26,29 @@
 
 <section class="featured">
 
-    <h2>WHAT'S IN THE SHOP?</h2>
+<h2>WHAT'S IN THE SHOP?</h2>
 
-    <p>
-        Our collection of used bicycles is coming soon.
-        Check back for vintage road bikes, commuters,
-        and whatever else we manage to drag out of a basement.
-    </p>
+{% if featured_bikes %}
+
+    <div class="bike-grid">
+
+        {% for bike in featured_bikes %}
+
+            {% include "shop/bike_card.html" with bike=bike %}
+
+        {% endfor %}
+
+    </div>
+
+{% else %}
+
+    <p>New bicycles coming soon. Check out our current inventory.</p>
+
+{% endif %}
+
+<a href="{% url 'bike_list' %}" class="shop-button">
+    Browse all bicycles →
+</a>
 
 </section>
 

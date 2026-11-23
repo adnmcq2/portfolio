@@ -21,7 +21,9 @@ def bike_list(request):
         "manufacturer": "manufacturer",
     }
 
-    inventory = Bike.objects.filter(status="available")
+    inventory = Bike.objects.filter(
+        status__in=["available", "reserved"]
+    )
 
     bikes = inventory.prefetch_related("photos")
 

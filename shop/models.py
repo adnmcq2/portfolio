@@ -61,6 +61,7 @@ class Bike(models.Model):
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
+    featured = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.year or ''} {self.manufacturer} {self.model}".strip()

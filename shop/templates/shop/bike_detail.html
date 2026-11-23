@@ -28,7 +28,18 @@
 
     <div class="bike-information">
 
+                <span class="bike-status status-{{ bike.status }}">
+    {{ bike.get_status_display }}
+</span>
+
         <h2>${{ bike.price }}</h2>
+
+<!--        {% if bike.status == "reserved" %}-->
+<!--    <p>This bicycle is currently reserved.</p>-->
+<!--{% elif bike.status == "sold" %}-->
+<!--    <p>This bicycle has found a new home.</p>-->
+<!--{% endif %}-->
+
 
         <p><strong>Manufacturer:</strong> {{ bike.manufacturer }}</p>
         <p><strong>Model:</strong> {{ bike.model }}</p>
@@ -36,7 +47,7 @@
         <p><strong>Category:</strong> {{ bike.get_category_display }}</p>
         <p><strong>Frame size:</strong> {{ bike.frame_size }}</p>
         <p><strong>Condition:</strong> {{ bike.get_condition_display }}</p>
-        <p><strong>Status:</strong> {{ bike.get_status_display }}</p>
+<!--        <p><strong>Status:</strong> {{ bike.get_status_display }}</p>-->
 
         <h3>About this bicycle</h3>
 

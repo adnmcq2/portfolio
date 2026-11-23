@@ -325,3 +325,45 @@ footer p {
 .inventory-controls button:hover {
     background-color: #b83b32;
 }
+
+/* Bicycle inventory status */
+
+.bike-status {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.status-available {
+    background-color: #344b3e;
+    color: #f3ecd9;
+}
+
+.status-reserved {
+    background-color: #d4b15c;
+    color: #24251f;
+}
+
+.status-sold {
+    background-color: #b83b32;
+    color: #f3ecd9;
+}
+
+.shop-button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #344b3e;
+    color: #f3ecd9;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+.shop-button:hover {
+    background-color: #b83b32;
+    color: #f3ecd9;
+}
