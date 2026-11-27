@@ -54,7 +54,9 @@ INSTALLED_APPS = [
 
 
     'pages',
-    'shop'
+    'shop',
+    'core',
+    'repairs'
 ]
 
 
@@ -81,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.site_settings',
             ],
         },
     },

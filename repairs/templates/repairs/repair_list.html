@@ -1,0 +1,206 @@
+{% extends "pages/base.html" %}
+
+{% block content %}
+
+<section class="intro">
+    <h2>The Workshop</h2>
+
+    <p>
+        Independent bicycle repair, maintenance and restoration
+        in Washington, DC.
+    </p>
+
+    <p>
+        Keep the old bikes rolling.
+    </p>
+
+    <div class="workshop-nav">
+        <a href="#services">[ REPAIR SERVICES ]</a>
+        <a href="#products">[ TOOLS & SUPPLIES ]</a>
+    </div>
+</section>
+
+
+<section id="services">
+
+    <h2>Repair Services</h2>
+
+    {% for category in categories %}
+
+        <div class="service-category">
+
+            <h3>{{ category.name }}</h3>
+
+            {% if category.description %}
+                <p>{{ category.description }}</p>
+            {% endif %}
+
+            {% for service in category.services.all %}
+
+                <div class="service-item">
+
+                    <div class="service-row">
+
+                        <span class="service-name">
+                            {{ service.name }}
+                        </span>
+
+                        <span class="service-leader"></span>
+
+                        <span class="service-price">
+                            {{ service.display_price }}
+                        </span>
+
+                    </div>
+
+                    {% if service.description %}
+                        <p class="service-description">
+                            {{ service.description }}
+                        </p>
+                    {% endif %}
+
+                    {% if service.parts_included %}
+                        <small>+ Parts included</small>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% empty %}
+
+        <p>Service menu coming soon.</p>
+
+    {% endfor %}
+
+    <p class="service-note">
+        Prices reflect labor unless otherwise specified.
+    </p>
+
+    {% if site_settings.contact_email %}
+
+        <a class="shop-button"
+           href="mailto:{{ site_settings.contact_email }}?subject=Repair%20Inquiry">
+            Request a Repair
+        </a>
+
+    {% endif %}
+
+</section>
+
+
+<section id="products">
+
+    <h2>Tools & Supplies</h2>
+
+    <p>
+        Prefer to do it yourself?
+        Tools, components and supplies for the home mechanic.
+    </p>
+
+    <form method="get"
+          action="{% url 'repair_list' %}#products"
+          class="inventory-controls">
+
+        <label for="category">Category:</label>
+
+        <select name="category" id="category">
+
+            <option value="">All products</option>
+
+            {% for value, label in product_categories %}
+
+                <option value="{{ value }}"
+                    {% if selected_category == value %}selected{% endif %}>
+                    {{ label }}
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+        <button type="submit">Filter</button>
+
+        <a class="reset-filters"
+           href="{% url 'repair_list' %}#products">
+            Clear
+        </a>
+
+    </form>
+
+    <div class="bike-grid">
+
+        {% for product in products %}
+
+            <article class="bike-card">
+
+                {% if product.in_stock %}
+
+                    <span class="bike-status status-available">
+                        In stock
+                    </span>
+
+                {% else %}
+
+                    <span class="bike-status status-sold">
+                        Out of stock
+                    </span>
+
+                {% endif %}
+
+                {% with photo=product.photos.all.0 %}
+
+                    {% if photo %}
+
+                        <img src="{{ photo.image.url }}"
+                             alt="{{ product.name }}"
+                             loading="lazy">
+
+                    {% else %}
+
+                        <div class="bike-placeholder">
+                            No photograph available
+                        </div>
+
+                    {% endif %}
+
+                {% endwith %}
+
+                <h3>{{ product.name }}</h3>
+
+                <p>{{ product.manufacturer }}</p>
+
+                {% if product.model %}
+                    <p>{{ product.model }}</p>
+                {% endif %}
+
+                <p>{{ product.get_condition_display }}</p>
+
+                <p>{{ product.description }}</p>
+
+                <p class="bike-price">${{ product.price }}</p>
+
+                {% if product.in_stock and site_settings.contact_email %}
+
+                    <a class="shop-button"
+                       href="mailto:{{ site_settings.contact_email }}?subject={{ product.name|urlencode }}">
+                        Inquire
+                    </a>
+
+                {% endif %}
+
+            </article>
+
+        {% empty %}
+
+            <p>No products currently listed in this category.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

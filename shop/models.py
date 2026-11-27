@@ -86,3 +86,98 @@ class BikePhoto(models.Model):
 
     def __str__(self):
         return f"Photo of {self.bike}"
+
+
+class Product(models.Model):
+
+    CATEGORY_CHOICES = [
+        ("tools", "Tools"),
+        ("consumables", "Consumables"),
+        ("components", "Components"),
+        ("accessories", "Accessories"),
+        ("equipment", "Workshop Equipment"),
+        ("other", "Other"),
+    ]
+
+    CONDITION_CHOICES = [
+        ("new", "New"),
+        ("used", "Used"),
+        ("refurbished", "Refurbished"),
+    ]
+
+    name = models.CharField(max_length=150)
+
+    manufacturer = models.CharField(
+        max_length=100,
+        blank=True,
+    )
+
+    model = models.CharField(
+        max_length=100,
+        blank=True,
+    )
+
+    category = models.CharField(
+        max_length=20,
+        choices=CATEGORY_CHOICES,
+    )
+
+    condition = models.CharField(
+        max_length=20,
+        choices=CONDITION_CHOICES,
+        default="new",
+    )
+
+    description = models.TextField(blank=True)
+
+    price = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+    )
+
+    quantity = models.PositiveIntegerField(default=0)
+
+    active = models.BooleanField(default=True)
+
+    featured = models.BooleanField(default=False)
+
+    display_order = models.PositiveIntegerField(default=0)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["display_order", "name"]
+
+    def __str__(self):
+        return f"{self.manufacturer} {self.name}".strip()
+
+    @property
+    def in_stock(self):
+        return self.quantity > 0
+
+    @property
+    def stock_status(self):
+        if self.in_stock:
+            return "In stock"
+        return "Out of stock"
+
+
+class ProductPhoto(models.Model):
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="photos",
+    )
+
+    image = models.ImageField(upload_to="products/")
+
+    caption = models.CharField(
+        max_length=200,
+        blank=True,
+    )
+
+    def __str__(self):
+        return f"Photo of {self.product}"

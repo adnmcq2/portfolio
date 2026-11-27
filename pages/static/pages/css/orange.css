@@ -1,0 +1,484 @@
+/* WEDNESDAY CYCLES */
+/* Good bikes. Second chances. */
+
+:root {
+    /* Brand colors */
+    --primary: #F6B26B;
+    --secondary: #0B0B0B;
+
+    /* Supporting colors */
+    --cream: #141414;
+    --paper: #202020;
+    --ink: #F4F1EB;
+    --muted: #B5B5B5;
+    --border: #666666;
+    --surface: #292929;
+    --placeholder: #303030;
+
+    /* Contrast colors */
+    --on-primary: #141414;
+    --on-secondary: #FFFFFF;
+
+    /* Functional colors */
+    --available: #315C42;
+    --reserved: #D4B15C;
+    --sold: #96372F;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.6;
+}
+
+/* Industrial typography and links */
+body { color-scheme: dark; }
+a { color: var(--primary); }
+a:hover { color: var(--ink); }
+a:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+main h1, main h2, main h3 {
+    font-family: Impact, "Arial Narrow", "Liberation Sans Narrow", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+/* HEADER */
+
+.site-header {
+    border-bottom: 3px solid var(--primary);
+    background: var(--paper);
+}
+
+.masthead {
+    padding: 45px 20px 35px;
+    text-align: center;
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+.masthead h1 {
+    margin: 0;
+    font-family: Impact, "Arial Narrow", sans-serif;
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+}
+
+.masthead p {
+    margin: 18px 0 0;
+    font-family: "Courier New", monospace;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* NAVIGATION */
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    background: var(--secondary);
+}
+
+.main-nav a {
+    padding: 14px 25px;
+    color: var(--on-secondary);
+    text-decoration: none;
+    font-family: "Courier New", monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.main-nav a:hover {
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+/* Keyboard navigation */
+
+.main-nav a:focus-visible,
+.shop-button:focus-visible,
+.inventory-controls button:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px var(--ink);
+}
+
+/* MAIN CONTENT */
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 55px 25px;
+}
+
+section {
+    margin-bottom: 65px;
+}
+
+section h2 {
+    margin-top: 0;
+    font-family: Impact, "Arial Narrow", sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.intro {
+    border-left: 7px solid var(--primary);
+    padding-left: 25px;
+}
+
+.intro p {
+    max-width: 700px;
+    font-size: 1.15rem;
+}
+
+.featured {
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--primary);
+    background: var(--surface);
+}
+
+.featured h2 {
+    color: var(--ink);
+}
+
+/* FOOTER */
+
+footer {
+    padding: 30px 20px;
+    background: var(--secondary);
+    color: var(--on-secondary);
+    text-align: center;
+    border-top: 3px solid var(--primary);
+}
+
+footer p {
+    margin: 5px 0;
+    font-family: "Courier New", monospace;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .masthead {
+        padding: 35px 12px;
+    }
+
+    .masthead h1 {
+        letter-spacing: -1px;
+    }
+
+    .main-nav a {
+        padding: 12px 14px;
+        font-size: 0.75rem;
+    }
+
+    main {
+        padding: 35px 18px;
+    }
+
+    .intro {
+        padding-left: 18px;
+    }
+
+    .featured {
+        padding: 20px;
+    }
+}
+
+/* Bicycle inventory */
+
+.bike-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 280px));
+    gap: 24px;
+    margin: 30px 0;
+}
+
+.bike-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 16px;
+    min-width: 0;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.bike-card img {
+    width: 100%;
+    height: 160px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    background-color: var(--paper);
+}
+
+.bike-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary);
+}
+
+.bike-card h3 {
+    font-size: 22px;
+    margin: 16px 0 8px;
+}
+
+.bike-card a {
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.bike-card a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 3px;
+}
+
+.bike-card p {
+    margin: 6px 0;
+}
+
+.bike-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.bike-placeholder {
+    height: 160px;
+    background-color: var(--placeholder);
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+}
+
+/* Individual bicycle listing */
+
+.bike-detail {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.bike-gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.bike-information {
+    border-top: 4px solid var(--primary);
+    padding-top: 15px;
+}
+
+.bike-information h2 {
+    color: var(--ink);
+    font-size: 36px;
+    margin-top: 0;
+}
+
+.bike-information p {
+    line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+    .bike-detail {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Inventory controls */
+
+.inventory-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 15px 0;
+    margin-top: 20px;
+    border-top: 1px solid var(--muted);
+    border-bottom: 1px solid var(--muted);
+}
+
+.inventory-controls label {
+    font-weight: bold;
+    color: var(--ink);
+}
+
+.inventory-controls select {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 8px 12px;
+    background-color: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--muted);
+    cursor: pointer;
+}
+
+.reset-filters {
+    color: var(--ink);
+    font-size: 14px;
+    text-decoration: underline;
+    margin-left: 10px;
+}
+
+.reset-filters:hover {
+    color: var(--ink);
+}
+
+.inventory-controls input[type="number"] {
+    width: 100px;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 8px 12px;
+    background-color: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--muted);
+}
+
+.inventory-controls button {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 9px 18px;
+    background-color: var(--primary);
+    color: var(--on-primary);
+    border: none;
+    cursor: pointer;
+}
+
+.inventory-controls button:hover {
+    background-color: var(--secondary);
+    color: var(--on-secondary);
+}
+
+/* Bicycle inventory status */
+
+.bike-status {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.status-available {
+    background-color: var(--available);
+    color: var(--on-secondary);
+}
+
+.status-reserved {
+    background-color: var(--reserved);
+    color: var(--on-primary);
+}
+
+.status-sold {
+    background-color: var(--sold);
+    color: var(--on-secondary);
+}
+
+.shop-button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: var(--primary);
+    color: var(--on-primary);
+    font-weight: bold;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+.shop-button:hover {
+    background-color: var(--secondary);
+    color: var(--on-secondary);
+}
+
+/* Site header photograph */
+
+.site-header-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    max-width: 850px;
+    padding: 0 20px;
+}
+
+.site-header-image img {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+@media (max-width: 700px) {
+    .site-header-image {
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+
+    .site-header-image img {
+        max-height: 200px;
+    }
+}
+footer a {
+    color: var(--on-secondary);
+}
+
+footer a:hover {
+    color: var(--primary);
+}
+
+/* Workshop-style controls */
+.shop-button, .inventory-controls button {
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--primary);
+}
+.shop-button:hover, .inventory-controls button:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+@media (prefers-reduced-motion: reduce) {
+    .bike-card { transition: none; }
+    .bike-card:hover { transform: none; }
+}
+
+
+.ascii-art {
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.15;
+    color: var(--primary);
+    background: var(--secondary);
+    padding: 20px;
+    text-align: center;
+    overflow-x: auto;
+}

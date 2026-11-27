@@ -17,17 +17,29 @@
 
     <header class="site-header">
 
-        <div class="masthead">
-            <h1>WEDNESDAY CYCLES</h1>
-            <p>USED BIKES • REPAIRS • WASHINGTON, DC</p>
-        </div>
+<!--        <div class="masthead">-->
+<!--            <h1>WEDNESDAY CYCLES</h1>-->
+<!--            <p>USED BIKES • REPAIRS • WASHINGTON, DC</p>-->
+<!--        </div>-->
+
+
+{% if site_settings.header_image %}
+    <div class="site-header-image">
+        <a href="/">
+            <img src="{{ site_settings.header_image.image.url }}"
+                 alt="{{ site_settings.header_image.alt_text|default:'Wednesday Cycles' }}">
+        </a>
+    </div>
+{% endif %}
 
         <nav class="main-nav">
             <a href="{% url 'home' %}">HOME</a>
-            <a href="/bikes/">BIKES</a>
-            <a href="/repairs/">REPAIRS</a>
-            <a href="/journal/">JOURNAL</a>
-            <a href="/about/">ABOUT</a>
+    <a href="{% url 'repair_list' %}">REPAIRS</a>
+
+    <a href="{% url 'bike_list' %}">BIKES</a>
+
+    <a href="/journal/">JOURNAL</a>
+<!--            <a href="/about/">ABOUT</a>-->
         </nav>
 
     </header>
@@ -38,8 +50,14 @@
     </main>
 
     <footer>
-        <p>WEDNESDAY CYCLES — WASHINGTON, DC</p>
-        <p>KEEP THE OLD BIKES ROLLING.</p>
+<!--        <p>WEDNESDAY CYCLES — WASHINGTON, DC</p>-->
+<!--        <p>KEEP THE OLD BIKES ROLLING.</p>-->
+
+        <pre class="ascii-art">
+  *   *   *
+  WEDNESDAY CYCLES
+  REPAIR / RESTORE / RIDE
+</pre>
     </footer>
 
 </body>
